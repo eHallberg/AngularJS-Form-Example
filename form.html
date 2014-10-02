@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="form">
+<head>
+	<title>Form</title>
+	<link rel="stylesheet" href="./lib/bootstrap-3.2.0-dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="./lib/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css"/>
+	<script src="./lib/js/angular.min.js"></script>
+	<script src="./js/uppgift.js"></script>
+</head>
+<body ng-controller="FormCtrl">
+	<div class="container">
+		<h1>Simple Angularjs form</h1>
+		<form name="testForm">
+			<input name="firstname" type="text" ng-model="formData.firstname" class="form-control" required="" ng-minlength="2" ng-pattern="regex.onlyChar" placeholder="Firstname"
+			aa-field="firstname"/>
+
+			<p class="alert alert-danger" ng-show="testForm.firstname.$error.minlength && testForm.firstname.$dirty">Must be longer than 2 characters</p>
+
+			<input name="surname" type="text" ng-model="formData.surname" class="form-control" required ng-minlength="2" ng-pattern="regex.onlyChar" placeholder="Surname"/>
+
+			<p class="alert alert-danger" ng-show="testForm.surname.$error.minlength && testForm.surname.$dirty">Must be longer than 2 characters</p>
+
+			<input name="password" type"password" ng-model="formData.password" class="form-control" placeholder="password" ng-pattern="regex.password"/>
+
+			<p class="alert alert-danger" ng-show="testForm.password.$invalid && testForm.password.$dirty">Atleast 6 characters, one uppercase letter and one number</p>
+
+			<input name="adress" type="text" ng-model="formData.adress" class="form-control" placeholder="adress"/>
+
+			<input name="zipcode" type="number" ng-model="formData.zipcode" class="form-control" placeholder="zip code" min="10000" max="99999" required/>
+
+			<p class="alert alert-danger" ng-show="testForm.zipcode.$error.required && testForm.zipcode.$dirty">Has to be a valid swedish zip</p>
+
+			<input name="city" type="text" ng-model="formData.city" class="form-control" placeholder="city" min="1"/>
+
+			<input name="blue" type="radio" ng-model="formData.color" value="blue"/>
+			Blue
+			<input name="red" type="radio" ng-model="formData.color" value="red"/>
+			Red
+			<br/>
+
+			<input name="green" type="radio" ng-model="formData.color" value="green"/>
+			Green
+			<input name="black" type="radio" ng-model="formData.color" value="black"/>
+			Black
+			<select ng-model="formData.cars" class="form-control"
+                data-ng-options="car for car in cars" text="Favorite car"></select>
+
+			<p class="alert alert-danger" ng-show="testForm.firstname.$error.pattern && testForm.firstname.$dirty">Only characters allowed</p>
+		</form>
+		<input type="submit" ng-disabled="testForm.$invalid" class="btn btn-default" ng-click="submitted=true" ng-click="checkAge()">
+		{{formString}}
+		<p ng-show="submitted" >
+			Name: {{ formData.firstname }} {{formData.surname }}
+			<br/>
+			Adress: {{formData.adress}}, {{formData.zipcode}}, {{formData.city}}
+			<br/>
+			Favorite color: {{formData.color }}
+			<br/>
+			Favorite car: {{formData.cars}}
+			<br/>
+
+		</p>
+
+	
+
+	</div>
+
+</body>
+</html>
